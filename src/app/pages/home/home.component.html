@@ -1,0 +1,12 @@
+    <div class="flex flex-wrap justify-center p-10">
+        <div class="flex py-10 m-1 w-screen lg:w-1/4 border rounded-lg items-center border-gray-300/60 justify-start px-10 hover:bg-gray-100 transition-colors cursor-pointer" *ngFor="let contact of contacts" routerLink="/contact/{{contact.id.value}}">
+            <img class="rounded-full" src="{{ contact.picture.medium }}" alt="">
+            <div class="pl-5">
+                <div class="flex text-black/70 font-bold">
+                    <p class="pr-1">{{contact.name.first}}</p>
+                    <p class="">{{contact.name.last}}</p>
+                </div>
+                <p class="text-black/40 pt-1">{{contact.email}}</p>
+            </div>
+        </div>
+    </div>
