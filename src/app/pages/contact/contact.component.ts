@@ -19,7 +19,4 @@ export class ContactComponent {
         this.contactos = await this.contactsService.getByID(this.routeID)
       }
 
-  navigate(){
-
-  }
 }

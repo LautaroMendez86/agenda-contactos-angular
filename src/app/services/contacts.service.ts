@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Contact } from '../interfaces/contact';
+import { API } from '../constants/api';
 
 
 @Injectable({
@@ -14,10 +16,37 @@ export class ContactsService {
     return users.results
   }
 
-  create(){}
-  delete(){}
-  edit(){}
+  async create(contact:Contact):Promise<boolean>{
+    if(contact.id) return false;
+    const res = await fetch(API+'contacts',{
+      method:'POST',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body: JSON.stringify(contact)
+    })
+    return res.ok
+  };
 
+  async delete(id:number):Promise<boolean>{
+    const res = await fetch(API+'contacts/'+id,{
+      method:'DELETE'
+    })
+    return res.ok
+  };
+  
+  async edit(contact:Contact):Promise<boolean>{
+    if(!contact.id) return false;
+    const res = await fetch(API+'contacts',{
+      method:'PUT',
+      headers:{
+        "Content-type":"application/json"
+      },
+      body: JSON.stringify(contact)
+    })
+    return res.ok
+  };
+  
   async getByID(id:string | null){
     const response = await fetch('../../assets/db/contact.json')
     const users = await response.json()
