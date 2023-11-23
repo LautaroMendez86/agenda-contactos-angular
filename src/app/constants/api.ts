@@ -1,1 +1,1 @@
-export const API = '../../assets/db/contact.json';
+export const API = 'https://localhost:50482/api/';

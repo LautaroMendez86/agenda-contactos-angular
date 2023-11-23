@@ -1,6 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnInit, inject } from '@angular/core';
 import { ContactsService } from 'src/app/services/contacts.service';
 import { Contact } from 'src/app/interfaces/contact';
 
@@ -9,24 +7,17 @@ import { Contact } from 'src/app/interfaces/contact';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
+  contactsService = inject(ContactsService);
   contacts:Contact[] = []
-  authService = inject(AuthService)
-  contactsService = inject(ContactsService)
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-
-    if(!this.authService.isLogin){
-        this.router.navigate(['register'], { relativeTo: this.route });
-    }
-  
+  ngOnInit(): void {
+    this.fetchContacts();
   }
- 
-  async ngOnInit(){
-    // this.contacts = await this.contactsService.getAll()
+
+  async fetchContacts(){
     this.contacts = await this.contactsService.getAll()
-    // this.contacts = await this.contactsService.index()
   }
-  
+
 }

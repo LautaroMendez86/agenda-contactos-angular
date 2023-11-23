@@ -13,88 +13,39 @@ import { Contact } from 'src/app/interfaces/contact';
 })
 export class NuevoContactoComponent {
   contactsService = inject(ContactsService);
+
   @Output() cerrar = new EventEmitter();
+  @Output() refresh = new EventEmitter();
+
   @Input() contacto:Contact = {
-    gender: '',
-    name: {
-      title: '',
-      first: '',
-      last: ''
-    },
-    location: {
-      street: {
-        number: 0,
-        name: ''
-      },
-      city: '',
-      state: '',
-      country: '',
-      postcode: 0,
-      coordinates: {
-        latitude: '',
-        longitude: ''
-      },
-      timezone: {
-        offset: '',
-        description: ''
-      }
-    },
+    id: 0,
+    name: '',
+    lastName: '',
+    address: '',
     email: '',
-    login: {
-      uuid: '',
-      username: '',
-      password: '',
-      salt: '',
-      md5: '',
-      sha1: '',
-      sha256: ''
-    },
-    dob: {
-      date: '',
-      age: 0
-    },
-    registered: {
-      date: '',
-      age: 0
-    },
-    phone: '',
-    cell: '',
-    id: {
-      name: '',
-      value: ''
-    },
-    picture: {
-      large: '',
-      medium: '',
-      thumbnail: ''
-    },
-    nat: ''
-  };
+    image: '',
+    number: '',
+    company: '',
+    userId: 0
+  }
   
   async onSubmit(){
-    this.contacto.id ?
-    this.editarContacto() :
-    this.agregarContacto();
+    this.contacto.id ? this.editarContacto() : this.agregarContacto();
+
   }
 
   async agregarContacto(){
     const res = await this.contactsService.create(this.contacto);
     this.cerrar.emit();
-    if(res){
-      // generarMensajeExito('Contacto agregado');
-    } else {
-      // generarMensajeError('Error agregando contacto');
-    }
+    this.refresh.emit();
+    
   }
 
   async editarContacto(){
     const res = await this.contactsService.edit(this.contacto);
     this.cerrar.emit();
-    if(res){
-      // generarMensajeExito('Contacto editado');
-    } else {
-      // generarMensajeError('Error editando contacto');
-    }
+    this.refresh.emit();
+
   }
 
 }

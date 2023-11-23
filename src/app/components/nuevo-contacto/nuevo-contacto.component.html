@@ -1,7 +1,7 @@
 <form
   #form="ngForm"
   (ngSubmit)="onSubmit()"
-  class="h-screen overflow-hidden flex flex-col items-center justify-center text-lg"
+  class="w-[35rem] h-screen overflow-hidden flex flex-col items-center justify-center text-lg"
 >
   <p class="text-2xl pb-10 font-bold">
     {{ contacto.id ? "Editar contacto" : "Nuevo contacto" }}
@@ -11,7 +11,7 @@
     <input
       class="pl-3 border rounded-md h-9"
       type="text"
-      [(ngModel)]="contacto.name.first"
+      [(ngModel)]="contacto.name"
       name="nombre"
     />
   </div>
@@ -20,7 +20,7 @@
     <input
       type="text"
       class="pl-3 border rounded-md h-9"
-      [(ngModel)]="contacto.name.last"
+      [(ngModel)]="contacto.lastName"
       name="apellido"
     />
   </div>
@@ -29,17 +29,8 @@
     <input
       class="pl-3 border rounded-md h-9"
       type="text"
-      [(ngModel)]="contacto.location.street.name"
+      [(ngModel)]="contacto.address"
       name="direccion"
-    />
-  </div>
-  <div class="flex flex-col justify-center items-left mb-3 w-3/4 font-light">
-    <label for="">Numero de telefono</label>
-    <input
-      class="pl-3 border rounded-md h-9"
-      type="text"
-      [(ngModel)]="contacto.cell"
-      name="telefono"
     />
   </div>
   <div class="flex flex-col justify-center items-left mb-3 w-3/4 font-light">
@@ -52,14 +43,6 @@
     />
   </div>
   <div class="flex flex-col justify-center items-left mb-3 w-3/4 font-light">
-    <label for="">Foto</label>
-    <input
-      class="pl-3 border rounded-md h-9"
-      type="text"
-      [(ngModel)]="contacto.picture.large"
-      name="img"
-      id=""
-    />
     <div class="flex pt-10 justify-end">
       <button
         class="border h-12 w-24 rounded-md border-green-500/50 hover:bg-green-400/20 transition-all"

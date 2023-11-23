@@ -7,11 +7,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
   authService = inject(AuthService)
-
-  isLogin = this.authService.isLogin
-  
   title = 'clase-03';
 
   

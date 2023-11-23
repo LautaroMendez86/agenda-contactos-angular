@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-   isActive = false;
+  isActive = false;
+  authService = inject(AuthService)
+   
+
+  logOut(){
+    this.authService.logOut();
+  }
 
    toggleMenu () {
     this.isActive = !this.isActive
